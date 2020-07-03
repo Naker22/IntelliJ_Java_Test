@@ -24,4 +24,15 @@ public class Weapon {
     public int getWeaponCost() {
         return weaponCost;
     }
+
+    @Override
+    public String toString() {
+        return "Weapon{" +
+                "weaponName='" + weaponName + '\'' +
+                ", weaponCost=" + weaponCost +
+                ", weaponDamage=" + weaponDamage +
+                ", weaponRange=" + weaponRange +
+                ", forMelee=" + forMelee +
+                '}';
+    }
 }

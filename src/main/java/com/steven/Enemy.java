@@ -17,4 +17,14 @@ public class Enemy {
         this.enemyForce = enemyForce;
         this.enemyDefence = enemyDefence;
     }
+
+    @Override
+    public String toString() {
+        return "Enemy{" +
+                "enemyName='" + enemyName + '\'' +
+                ", enemyForce=" + enemyForce +
+                ", enemyDefence=" + enemyDefence +
+                ", isMelee=" + isMelee +
+                '}';
+    }
 }

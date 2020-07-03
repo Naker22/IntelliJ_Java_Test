@@ -34,4 +34,7 @@ public class Hero {
     public int getHeroCost() {
         return heroCost;
     }
+    public boolean getTypeOfAttack(){
+        return isMelee;
+    }
 }
