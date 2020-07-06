@@ -5,6 +5,7 @@ public class Hero {
     private int force;
     private int heroCost;
     private int heroDefence;
+    private int health =100;
     private boolean isMelee =true;
     public Hero(String heroName, int force, int heroCost,int heroDefence, boolean isMelee){
         this.heroName = heroName;
@@ -36,5 +37,21 @@ public class Hero {
     }
     public boolean getTypeOfAttack(){
         return isMelee;
+    }
+
+    public int getHeroDefence() {
+        return heroDefence;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getForce() {
+        return force;
     }
 }

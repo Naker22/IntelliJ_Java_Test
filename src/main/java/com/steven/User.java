@@ -18,12 +18,28 @@ public class User {
         this.weapon = weapon;
     }
 
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    public Hero getHero() {
+        return hero;
+    }
+
+    public Equipment getEquipment() {
+        return equipment;
+    }
+
     public void setEquipment(Equipment equipment) {
         this.equipment = equipment;
     }
 
     public int getBalance() {
         return balance;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
     }
 
     @Override

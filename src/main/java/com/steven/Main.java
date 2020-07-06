@@ -69,24 +69,61 @@ public class Main {
         System.out.print("Enter your name: ");
         String name = scan.next();
         User player1 = new User(name);
-        System.out.print("Pick hero(write number counting from 0): ");
-        for (Enemy enemy : enemies) {
-            System.out.println(enemy.toString());
+
+        System.out.print("Pick hero(write number counting from 0): \n");
+        for (Hero hero:heroes) {
+            System.out.println(hero.toString());
         }
-        player1.setHero(heroes.get(scan.nextByte()));
-        System.out.print("Pick weapon(write number counting from 0): ");
+        int getType = scan.nextByte();
+        player1.setBalance(player1.getBalance()-heroes.get(getType).getHeroCost());
+        player1.setHero(heroes.get(getType));
+        System.out.println(player1.getBalance());
+
+        System.out.print("Pick weapon(write number counting from 0): \n");
         for (Weapon weapon : meleeWeapons) {
             System.out.println(weapon.toString());
         }
-        player1.setWeapon(meleeWeapons.get(scan.nextByte()));
-        System.out.print("Pick hero(write number counting from 0): ");
+        getType = scan.nextByte();
+        player1.setBalance(player1.getBalance()-meleeWeapons.get(getType).getWeaponCost());
+        player1.setWeapon(meleeWeapons.get(getType));
+        System.out.println(player1.getBalance());
+
+        System.out.print("Pick hero(write number counting from 0): \n");
         for (Equipment equipment : equipments) {
             System.out.println(equipment.toString());
         }
-        player1.setEquipment(equipments.get(scan.nextByte()));
-        System.out.println("Your Hero:");
+        getType = scan.nextByte();
+        player1.setBalance(player1.getBalance()-equipments.get(getType).getEquipmentCost());
+        player1.setEquipment(equipments.get(getType));
+        System.out.println(player1.getBalance());
+
+        System.out.println("Your Hero:\n");
         System.out.println(player1.toString());
-        System.out.println(player1.getBalance() - heroes.get(0).getHeroCost());
-        System.exit(0);
+
+        int damage = player1.getHero().getForce()*player1.getWeapon().getWeaponDamage();
+        System.out.println("Your damage: "+ damage);
+        int randomEnemy= (int)(Math.random()*4);
+        Enemy myEnemy= enemies.get(randomEnemy);
+        System.out.println(myEnemy.toString());
+
+        while(true){
+            myEnemy.setHealth(myEnemy.getHealth()-(damage - myEnemy.getEnemyDefence()));
+            System.out.println(myEnemy.getEnemyName()+" health: "+myEnemy.getHealth());
+            if(myEnemy.getHealth()<=0) {
+                System.out.println("You win");
+                break;
+            }
+            player1.getHero().setHealth(player1.getHero().getHealth()-
+                    (myEnemy.getEnemyForce()*3-
+                            (player1.getHero().getHeroDefence()+player1.getEquipment().getDefence())));
+            System.out.println("Your health: " + player1.getHero().getHealth());
+            if(player1.getHero().getHealth()<0){
+                System.out.println("You lost");
+                break;
+            }
+
+        }
+        System.out.println("Game over");
+
     }
 }

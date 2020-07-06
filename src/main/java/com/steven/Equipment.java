@@ -15,6 +15,10 @@ public class Equipment {
         return equipmentCost;
     }
 
+    public int getDefence() {
+        return defence;
+    }
+
     @Override
     public String toString() {
         return "Equipment{" +

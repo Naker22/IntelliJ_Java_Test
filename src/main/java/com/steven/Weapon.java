@@ -25,6 +25,10 @@ public class Weapon {
         return weaponCost;
     }
 
+    public int getWeaponDamage() {
+        return weaponDamage;
+    }
+
     @Override
     public String toString() {
         return "Weapon{" +
