@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Hero Balanar = new Hero("balanar",4,350,6);
         Hero Archer = new Hero("Archer",2,250,7,false);
         Hero Linter = new Hero("Linter",6,500,3);
@@ -20,9 +20,9 @@ public class Main {
         heroes.add(Keiry);
 
         Weapon simpleSword = new Weapon("Sword",100,3,3);
-        Weapon superbow = new Weapon("Super bow",600,7,9);
+        Weapon superbow = new Weapon("Super bow",600,7,9,false);
         Weapon longSword = new Weapon("Long sword",300,9,4);
-        Weapon longBow = new Weapon("Long bow",250,4,9);
+        Weapon longBow = new Weapon("Long bow",250,4,9,false);
         List<Weapon> meleeWeapons = new ArrayList<>();
         meleeWeapons.add(simpleSword);
         meleeWeapons.add(longSword);
@@ -80,12 +80,21 @@ public class Main {
         System.out.println(player1.getBalance());
 
         System.out.print("Pick weapon(write number counting from 0): \n");
-        for (Weapon weapon : meleeWeapons) {
-            System.out.println(weapon.toString());
+        if(player1.getHero().getTypeOfAttack()){
+            for (Weapon weapon : meleeWeapons) {
+                System.out.println(weapon.toString());
+            }
+        }
+        else{
+            for(Weapon weapon:rangeWeapons){
+                System.out.println(weapon);
+            }
         }
         getType = scan.nextByte();
         player1.setBalance(player1.getBalance()-meleeWeapons.get(getType).getWeaponCost());
-        player1.setWeapon(meleeWeapons.get(getType));
+
+        if(player1.getHero().getTypeOfAttack())player1.setWeapon(meleeWeapons.get(getType));
+        else player1.setWeapon(rangeWeapons.get(getType));
         System.out.println(player1.getBalance());
 
         System.out.print("Pick hero(write number counting from 0): \n");
@@ -113,6 +122,7 @@ public class Main {
                 System.out.println("You win");
                 break;
             }
+            //Thread.sleep(1000);
             player1.getHero().setHealth(player1.getHero().getHealth()-
                     (myEnemy.getEnemyForce()*3-
                             (player1.getHero().getHeroDefence()+player1.getEquipment().getDefence())));
@@ -121,6 +131,7 @@ public class Main {
                 System.out.println("You lost");
                 break;
             }
+            //Thread.sleep(1000);
 
         }
         System.out.println("Game over");

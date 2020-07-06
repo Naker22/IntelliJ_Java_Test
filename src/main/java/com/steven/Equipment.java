@@ -1,6 +1,7 @@
 package com.steven;
 
-public class Equipment {
+
+public class Equipment  {
     private String equipmentName;
     private int defence;
     private int equipmentCost;
