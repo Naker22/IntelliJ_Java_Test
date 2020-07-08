@@ -80,29 +80,45 @@ public class Main {
         System.out.println(player1.getBalance());
 
         System.out.print("Pick weapon(write number counting from 0): \n");
-        if(player1.getHero().getTypeOfAttack()){
-            for (Weapon weapon : meleeWeapons) {
-                System.out.println(weapon.toString());
+        while(true) {
+            if (player1.getHero().getTypeOfAttack()) {
+                for (Weapon weapon : meleeWeapons) {
+                    System.out.println(weapon.toString());
+                }
+                getType = scan.nextByte();
+                if(player1.getBalance() - meleeWeapons.get(getType).getWeaponCost() >= 0){
+                    player1.setBalance(player1.getBalance() - meleeWeapons.get(getType).getWeaponCost());
+                    break;
+                }else System.out.println("It's too expensive for you get another weapon except "+ getType);
+            } else {
+                for (Weapon weapon : rangeWeapons) {
+                    System.out.println(weapon);
+                }
+                getType = scan.nextByte();
+                if(player1.getBalance() - rangeWeapons.get(getType).getWeaponCost() >= 0){
+                    player1.setBalance(player1.getBalance() - rangeWeapons.get(getType).getWeaponCost());
+                    break;
+                }else System.out.println("It's too expensive for you get another weapon except "+ getType);
             }
-        }
-        else{
-            for(Weapon weapon:rangeWeapons){
-                System.out.println(weapon);
-            }
-        }
-        getType = scan.nextByte();
-        player1.setBalance(player1.getBalance()-meleeWeapons.get(getType).getWeaponCost());
 
+
+
+        }
         if(player1.getHero().getTypeOfAttack())player1.setWeapon(meleeWeapons.get(getType));
         else player1.setWeapon(rangeWeapons.get(getType));
         System.out.println(player1.getBalance());
 
-        System.out.print("Pick hero(write number counting from 0): \n");
-        for (Equipment equipment : equipments) {
-            System.out.println(equipment.toString());
+        System.out.print("Pick equipment(write number counting from 0): \n");
+        while(true) {
+            for (Equipment equipment : equipments) {
+                System.out.println(equipment.toString());
+            }
+            getType = scan.nextByte();
+            if(player1.getBalance()-equipments.get(getType).getEquipmentCost()>=0) {
+                player1.setBalance(player1.getBalance() - equipments.get(getType).getEquipmentCost());
+                break;
+            }else System.out.println("It's too expensive for you get another equipment except "+ getType);
         }
-        getType = scan.nextByte();
-        player1.setBalance(player1.getBalance()-equipments.get(getType).getEquipmentCost());
         player1.setEquipment(equipments.get(getType));
         System.out.println(player1.getBalance());
 
