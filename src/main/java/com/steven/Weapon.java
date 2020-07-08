@@ -29,6 +29,10 @@ public class Weapon {
         return weaponDamage;
     }
 
+    public int getWeaponRange() {
+        return weaponRange;
+    }
+
     @Override
     public String toString() {
         return "Weapon{" +

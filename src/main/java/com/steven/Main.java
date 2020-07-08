@@ -20,9 +20,9 @@ public class Main {
         heroes.add(Keiry);
 
         Weapon simpleSword = new Weapon("Sword",100,3,3);
-        Weapon superbow = new Weapon("Super bow",600,7,9,false);
+        Weapon superbow = new Weapon("Super bow",600,7,6,false);
         Weapon longSword = new Weapon("Long sword",300,9,4);
-        Weapon longBow = new Weapon("Long bow",250,4,9,false);
+        Weapon longBow = new Weapon("Long bow",250,4,6,false);
         List<Weapon> meleeWeapons = new ArrayList<>();
         meleeWeapons.add(simpleSword);
         meleeWeapons.add(longSword);
@@ -42,7 +42,7 @@ public class Main {
         equipments.add(beastCloak);
 
         Enemy brocker = new Enemy("Brocker",7,7);
-        Enemy moner = new Enemy("Moner",4,3);
+        Enemy moner = new Enemy("Moner",6,8);
         Enemy keeper = new Enemy("Keeper",9,9);
         Enemy joker = new Enemy("Joker",7,7);
         List<Enemy> enemies = new ArrayList<>();
@@ -130,17 +130,21 @@ public class Main {
         int randomEnemy= (int)(Math.random()*4);
         Enemy myEnemy= enemies.get(randomEnemy);
         System.out.println(myEnemy.toString());
-
+        int criticalDamage;
         while(true){
-            myEnemy.setHealth(myEnemy.getHealth()-(damage - myEnemy.getEnemyDefence()));
+            criticalDamage = (int)(Math.random()*player1.getWeapon().getWeaponRange());
+            myEnemy.setHealth(myEnemy.getHealth()-(damage+criticalDamage - myEnemy.getEnemyDefence()));
             System.out.println(myEnemy.getEnemyName()+" health: "+myEnemy.getHealth());
             if(myEnemy.getHealth()<=0) {
                 System.out.println("You win");
                 break;
             }
             //Thread.sleep(1000);
+            if(myEnemy.isMelee()) criticalDamage = (int)(Math.random()*12);
+            else criticalDamage = (int)(Math.random()*10);
+            System.out.println("critical damage :" + criticalDamage);
             player1.getHero().setHealth(player1.getHero().getHealth()-
-                    (myEnemy.getEnemyForce()*3-
+                    (myEnemy.getEnemyForce()*2+criticalDamage-
                             (player1.getHero().getHeroDefence()+player1.getEquipment().getDefence())));
             System.out.println("Your health: " + player1.getHero().getHealth());
             if(player1.getHero().getHealth()<0){

@@ -19,6 +19,10 @@ public class Enemy {
         this.enemyDefence = enemyDefence;
     }
 
+    public boolean isMelee() {
+        return isMelee;
+    }
+
     public int getHealth() {
         return health;
     }
